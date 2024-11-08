@@ -22,6 +22,9 @@ class BankAccount:
         now = datetime.now()
         if now.hour < 8 or now.hour >= 18:
             raise WithdrawalTimeRestrictionError("You can only withdraw money between 8:00 and 18:00")
+        if now.weekday() in [5, 6]:
+            raise WithdrawalTimeRestrictionError("You can only withdraw money on weekdays")
+        
         if amount > 0:
             self.balance -= amount
             self._log_transaction(f"Withdrawn: {amount}. New balance: {self.balance}")  
