@@ -1,0 +1,4 @@
+ipdb
+python-dotenv
+requests
+pytest
