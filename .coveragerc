@@ -1,0 +1,4 @@
+[report]
+fail_under = 85
+# Esta configuración hará que se muestre un error si tus pruebas no superan el 85% de cobertura
+# coverage run --source src -m unittest

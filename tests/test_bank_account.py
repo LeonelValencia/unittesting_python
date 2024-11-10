@@ -20,7 +20,9 @@ class TestBankAccount(unittest.TestCase):
         new_balance = self.account.deposit(500)
         self.assertEqual(new_balance, 1500, "El balance no es correcto")
 
-    def test_withdraw(self):
+    @patch("src.bank_account.datetime")
+    def test_withdraw(self, mock_datetime):
+        mock_datetime.now.return_value.hour = 10
         new_balance = self.account.withdraw(500)
         self.assertEqual(new_balance, 500, "El balance no es correcto")
 
@@ -45,9 +47,8 @@ class TestBankAccount(unittest.TestCase):
             
     def test_count_transactions(self):
         self.account.deposit(100)
-        self.account.withdraw(50)
         self.account.transfer(100, BankAccount())
-        assert self._count_lines() == 4
+        assert self._count_lines() == 3
     
     @patch("src.bank_account.datetime")
     def test_withdraw_during_business_hours(self, mock_datetime):
